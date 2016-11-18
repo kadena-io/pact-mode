@@ -34,7 +34,7 @@
 (require 'inf-lisp)
 
 ;; Version of mode
-(defconst pact-mode-version "0.0-git" "The release version of `pact-mode'.")
+(defconst pact-mode-version "0.0.1-git" "The release version of `pact-mode'.")
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")
@@ -97,6 +97,7 @@
   (setq-local semantic-function-argument-separator " ")
   (setq-local semantic--parse-table semantic--elisp-parse-table)
   (setq-local inferior-lisp-program "pact") ;; TODO prompt stuff isn't working
+  (setq-local inferior-lisp-load-command "(load \"%s\" true)\n")
   (semantic-mode)
   )
 
