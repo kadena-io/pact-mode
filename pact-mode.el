@@ -4,7 +4,7 @@
 
 ;; Maintainer: stuart@kadena.io
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts
-;; Version: 0.0-git
+;; Version: 0.0.2-git
 ;; URL: http://github.com/kadena-io/pact-mode
 
 ;; This file is free software; you can redistribute it and/or modify

@@ -11,6 +11,7 @@ Clone this repo, add it to your `load-path` in your `.emacs` file, and require `
 ```lisp
 (add-to-list 'load-path "~/[where you cloned it]/pact-mode/")
 (require 'pact-mode)
+(require 'pact-flycheck) ;;; assuming you want to use flycheck
 ```
 
 You'll need a working Pact installation to use the inferior shell.
@@ -24,7 +25,4 @@ Features
 - Load current buffer into inferior REPL with `C-c C-l`. With prefix (`C-u C-c C-l`) prompt for file to load.
 - Use `semantic` features under the Development menu, like "Navigate -> Find Tag Globally ..."
   which finds any tag in any buffer you've opened.
-
-TODOs
----
-- Flycheck-style highlighting
+- Linting via flycheck.
