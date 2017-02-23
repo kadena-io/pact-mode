@@ -21,11 +21,10 @@ Features
 ---
 - Syntax highlighting
 - Launch the pact interpreter from the 'Lisp' menu ("inferior lisp process") or with `C-c C-z`
-- Load current buffer into inferior REPL with `C-c C-l`
+- Load current buffer into inferior REPL with `C-c C-l`. With prefix (`C-u C-c C-l`) prompt for file to load.
 - Use `semantic` features under the Development menu, like "Navigate -> Find Tag Globally ..."
   which finds any tag in any buffer you've opened.
 
 TODOs
 ---
 - Flycheck-style highlighting
-- Pact REPL needs an update to reset internal state upon file load

@@ -34,7 +34,7 @@
 (require 'inf-lisp)
 
 ;; Version of mode
-(defconst pact-mode-version "0.0.1-git" "The release version of `pact-mode'.")
+(defconst pact-mode-version "0.0.2-git" "The release version of `pact-mode'.")
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")
@@ -99,8 +99,16 @@
   (setq-local inferior-lisp-program "pact") ;; TODO prompt stuff isn't working
   (setq-local inferior-lisp-load-command "(load \"%s\" true)\n")
   (semantic-mode)
+  (substitute-key-definition 'lisp-load-file 'pact-load-file lisp-mode-map)
+
   )
 
+(defun pact-load-file (prompt)
+  "Load current buffer into pact inferior process.
+With prefix PROMPT, prompt for file to load."
+  (interactive "P")
+  (if prompt (call-interactively 'lisp-load-file)
+    (lisp-load-file (buffer-name))))
 
 
 (put 'module 'lisp-indent-function 'defun)

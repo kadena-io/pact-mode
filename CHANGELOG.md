@@ -1,3 +1,8 @@
+0.0.2
+---
+
+C-c C-l now loads current pact buffer with no prompt unless called with prefix.
+
 0.0.1
 ---
 
