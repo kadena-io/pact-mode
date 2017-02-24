@@ -32,18 +32,26 @@
             source-inplace)
   :error-patterns
   ((warning line-start
-            (file-name) ":" line ":" column
+            (file-name (minimal-match
+                        (and (not blank)
+                             (one-or-more not-newline))))
+            ":" line ":" column
             ":Warning:"
-            (message) ;; (one-or-more (and (one-or-more (not (any ?\n))) ?\n)))
+            (message)
             line-end)
    (error line-start
-          (file-name) ":" line ":" column
+          (file-name (minimal-match
+                        (and (not blank)
+                             (one-or-more not-newline))))
+          ":" line ":" column
           ":"
-          (message) ;; (one-or-more (and (one-or-more (not (any ?\n))) ?\n)))
+          (message)
           line-end))
   :modes (pact-mode)
   :error-filter
   (lambda (errors)
+    ;;(dolist (err errors)
+    ;;  (message "huh %s" err))
     (flycheck-increment-error-columns errors))
   )
 
