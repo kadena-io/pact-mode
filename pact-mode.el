@@ -34,7 +34,7 @@
 (require 'inf-lisp)
 
 ;; Version of mode
-(defconst pact-mode-version "0.0.2-git" "The release version of `pact-mode'.")
+(defconst pact-mode-version "0.0.3-git" "The release version of `pact-mode'.")
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")

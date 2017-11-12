@@ -1,3 +1,8 @@
+0.0.3
+---
+
+- Traces in flycheck: `pact-flycheck-do-trace`, `pact-flycheck-toggle-trace`
+
 0.0.2
 ---
 

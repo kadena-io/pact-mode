@@ -25,10 +25,20 @@
 (require 'pact-mode)
 
 
+(flycheck-def-option-var pact-flycheck-do-trace nil pact-checker
+  "Controls whether pact linting should include trace output.
+
+Use `pact-flycheck-toggle-trace` to enable and disable interactively.
+Requires at least pact 2.3.4."
+  :type 'boolean
+  :safe #'booleanp)
+
+
 (flycheck-define-checker pact-checker
   "Pact smart contract language flycheck support."
   :command ("pact"
             "-r"
+            (option-flag "-t" pact-flycheck-do-trace)
             source-inplace)
   :error-patterns
   ((warning line-start
@@ -37,6 +47,14 @@
                              (one-or-more not-newline))))
             ":" line ":" column
             ":Warning:"
+            (message)
+            line-end)
+   (info line-start
+            (file-name (minimal-match
+                        (and (not blank)
+                             (one-or-more not-newline))))
+            ":" line ":" column
+            ":Trace:"
             (message)
             line-end)
    (error line-start
@@ -56,6 +74,12 @@
   )
 
 (customize-set-variable 'flycheck-checkers (add-to-list 'flycheck-checkers 'pact-checker))
+
+(defun pact-flycheck-toggle-trace ()
+  "Toggle pact linting of trace output."
+  (interactive)
+  (set (make-local-variable 'pact-flycheck-do-trace) (not pact-flycheck-do-trace))
+  (message "Pact tracing %s" (if pact-flycheck-do-trace "enabled" "disabled")))
 
 (provide 'pact-flycheck)
 
