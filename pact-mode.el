@@ -2,10 +2,11 @@
 
 ;; Copyright (c) 2016 Stuart Popejoy
 
+;; Author: Stuart Popejoy
 ;; Maintainer: stuart@kadena.io
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts
 ;; Version: 0.0.2-git
-;; URL: http://github.com/kadena-io/pact-mode
+;; Url: http://github.com/kadena-io/pact-mode
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
