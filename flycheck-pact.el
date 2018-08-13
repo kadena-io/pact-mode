@@ -1,4 +1,4 @@
-;; flycheck=pact.el -- Pact flycheck support.
+;; flycheck-pact.el -- Pact flycheck support.
 
 ;; Copyright (c) 2017 Stuart Popejoy
 
