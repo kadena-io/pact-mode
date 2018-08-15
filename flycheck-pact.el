@@ -1,4 +1,4 @@
-;; flycheck=pact.el -- Pact flycheck support. -*- lexical-binding: t; -*-
+;; flycheck-pact.el -- Pact flycheck support. -*- lexical-binding: t; -*-\
 
 ;; Copyright (c) 2017 Stuart Popejoy
 
