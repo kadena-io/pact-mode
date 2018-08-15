@@ -1,4 +1,4 @@
-;; pact-mode.el -- Mode for Pact a LISPlike smart contract language.
+;; pact-mode.el -- Mode for Pact a LISPlike smart contract language. -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2016 Stuart Popejoy
 
