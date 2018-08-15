@@ -5,7 +5,7 @@
 ;; Author: Stuart Popejoy
 ;; Maintainer: stuart@kadena.io
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts
-;; Url: http://github.com/kadena-io/pact-mode
+;; URL: http://github.com/kadena-io/pact-mode
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
 ;;; Commentary:
 
-;; A major mode for editing Pact, a smart contract language, in Emacs.
+;; Flycheck support for editing Pact, a smart contract language, in Emacs.
 ;; See `http://kadena.io/pact'.
 
 ;;; Change Log:
