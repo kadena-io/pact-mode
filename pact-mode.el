@@ -5,7 +5,7 @@
 ;; Author: Stuart Popejoy
 ;; Maintainer: Stuart Popejoy <stuart@kadena.io>
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts, tools, mode
-;; Version: 0.0.3-git
+;; Version: 0.0.4-git
 ;; URL: https://github.com/kadena-io/pact-mode
 ;; Package-Requires: ((emacs "24.3"))
 
