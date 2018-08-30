@@ -1,6 +1,11 @@
-;; pact-flycheck.el -- Pact flycheck support.
+;; flycheck-pact.el -- Pact flycheck support. -*- lexical-binding: t; -*-\
 
 ;; Copyright (c) 2017 Stuart Popejoy
+
+;; Author: Stuart Popejoy
+;; Maintainer: stuart@kadena.io
+;; Keywords: pact, lisp, languages, blockchain, smartcontracts
+;; URL: http://github.com/kadena-io/pact-mode
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -17,6 +22,9 @@
 
 ;;; Commentary:
 
+;; Flycheck support for editing Pact, a smart contract language, in Emacs.
+;; See `http://kadena.io/pact'.
+
 ;;; Change Log:
 
 ;;; Code:
@@ -25,10 +33,10 @@
 (require 'pact-mode)
 
 
-(flycheck-def-option-var pact-flycheck-do-trace nil pact-checker
+(flycheck-def-option-var flycheck-pact-do-trace nil pact-checker
   "Controls whether pact linting should include trace output.
 
-Use `pact-flycheck-toggle-trace` to enable and disable interactively.
+Use `flycheck-pact-toggle-trace` to enable and disable interactively.
 Requires at least pact 2.3.4."
   :type 'boolean
   :safe #'booleanp)
@@ -38,7 +46,7 @@ Requires at least pact 2.3.4."
   "Pact smart contract language flycheck support."
   :command ("pact"
             "-r"
-            (option-flag "-t" pact-flycheck-do-trace)
+            (option-flag "-t" flycheck-pact-do-trace)
             source-inplace)
   :error-patterns
   ((warning line-start
@@ -75,12 +83,12 @@ Requires at least pact 2.3.4."
 
 (customize-set-variable 'flycheck-checkers (add-to-list 'flycheck-checkers 'pact-checker))
 
-(defun pact-flycheck-toggle-trace ()
+(defun flycheck-pact-toggle-trace ()
   "Toggle pact linting of trace output."
   (interactive)
-  (set (make-local-variable 'pact-flycheck-do-trace) (not pact-flycheck-do-trace))
-  (message "Pact tracing %s" (if pact-flycheck-do-trace "enabled" "disabled")))
+  (set (make-local-variable 'flycheck-pact-do-trace) (not flycheck-pact-do-trace))
+  (message "Pact tracing %s" (if flycheck-pact-do-trace "enabled" "disabled")))
 
-(provide 'pact-flycheck)
+(provide 'flycheck-pact)
 
-;;; pact-flycheck.el ends here
+;;; flycheck-pact.el ends here

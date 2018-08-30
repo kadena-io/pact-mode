@@ -1,7 +1,8 @@
-;; pact-mode.el -- Mode for Pact a LISPlike smart contract language.
+;; pact-mode.el -- Mode for Pact a LISPlike smart contract language. -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2016 Stuart Popejoy
 
+;; Author: Stuart Popejoy
 ;; Maintainer: stuart@kadena.io
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts
 ;; Version: 0.0.2-git
