@@ -1,12 +1,13 @@
-;; pact-mode.el -- Mode for Pact a LISPlike smart contract language. -*- lexical-binding: t; -*-
+;;; pact-mode.el --- Mode for Pact, a LISPlike smart contract language. -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2016 Stuart Popejoy
 
 ;; Author: Stuart Popejoy
-;; Maintainer: stuart@kadena.io
-;; Keywords: pact, lisp, languages, blockchain, smartcontracts
-;; Version: 0.0.2-git
-;; URL: http://github.com/kadena-io/pact-mode
+;; Maintainer: Stuart Popejoy <stuart@kadena.io>
+;; Keywords: pact, lisp, languages, blockchain, smartcontracts, tools, mode
+;; Version: 0.0.4
+;; URL: https://github.com/kadena-io/pact-mode
+;; Package-Requires: ((emacs "24.3"))
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -34,8 +35,6 @@
 (require 'semantic/bovine/el)
 (require 'inf-lisp)
 
-;; Version of mode
-(defconst pact-mode-version "0.0.3-git" "The release version of `pact-mode'.")
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")
@@ -87,8 +86,6 @@
 (define-derived-mode pact-mode lisp-mode "Pact"
   "Major more for editing Pact smart contracts and test scripts."
   :group 'pact
-  (when (version< emacs-version "24.3")
-    (error "Error: pact-mode requires at least Emacs 24.3"))
   (setq-local font-lock-defaults
               '((pact-font-lock-keywords)
                 nil nil nil nil
@@ -186,12 +183,9 @@ With prefix PROMPT, prompt for file to load."
     (semantic--tag-put-property tag 'dependency-file fname)))
 
 ;;;###autoload
-(progn
-  (add-to-list 'auto-mode-alist
-               '("\\.\\(pact\\|repl\\)\\'" . pact-mode)))
+(add-to-list 'auto-mode-alist
+             '("\\.\\(pact\\|repl\\)\\'" . pact-mode))
 
 (provide 'pact-mode)
-
-
 
 ;;; pact-mode.el ends here
