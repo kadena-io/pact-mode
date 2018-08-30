@@ -25,4 +25,4 @@ Features
 - Load current buffer into inferior REPL with `C-c C-l`. With prefix (`C-u C-c C-l`) prompt for file to load.
 - Use `semantic` features under the Development menu, like "Navigate -> Find Tag Globally ..."
   which finds any tag in any buffer you've opened.
-- Linting via flycheck supported with the `flycheck-pact` packageCC
+- Linting via flycheck supported with the `flycheck-pact` package
