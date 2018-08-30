@@ -6,7 +6,7 @@ This is an emacs mode for the smart contract language [Pact](http://kadena.io/pa
 Quick Installation
 ---
 
-Install `pact-mode` from [MELPA](https://melpa.org) or clone this repo and add it to your `load-path` in your `.emacs` or `init.el` file, requiring `pact-mode`. Additionally, this mode has [Flycheck](https://github.com/kadena-io/flycheck-pact).
+Install `pact-mode` from [MELPA](https://melpa.org) or clone this repo and add it to your `load-path` in your `.emacs` or `init.el` file, requiring `pact-mode`. Additionally, this mode has [Flycheck](https://github.com/kadena-io/flycheck-pact) linting support.
 
 ```lisp
 (add-to-list 'load-path "~/[where you cloned it]/pact-mode/")
