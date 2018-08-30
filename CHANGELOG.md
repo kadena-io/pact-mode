@@ -1,4 +1,5 @@
 0.0.4
+---
 
 - `pact-flycheck` renamed to `flycheck-pact`, commentary and code changes in alignment with Melpa standards
 
