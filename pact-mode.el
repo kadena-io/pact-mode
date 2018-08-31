@@ -82,6 +82,7 @@
     )
   "Default expressions to highlight in Pact mode.")
 
+;;;###autoload
 (define-derived-mode pact-mode lisp-mode "Pact"
   "Major more for editing Pact smart contracts and test scripts."
   :group 'pact
