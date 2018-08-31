@@ -44,43 +44,42 @@
   "Regexp match for valid pact identifiers.")
 
 (defconst pact-font-lock-keywords
-  (eval-when-compile
-    `( ;; Function definition (anything that starts with def and is not
-      ;; listed above)
-      (,(concat "\\(def[^ \r\n\t]*\\)"
-                "\\>"
-                "[ \r\n\t]*"
-                "\\(" pact-identifier "\\)?")
-       (1 font-lock-keyword-face)
-       (2 font-lock-function-name-face nil t))
-      ;; Special forms
-      (,(concat
-         "("
-         (regexp-opt
-          '("module" "list" "let" "let*"
-             "step" "use" "step-with-rollback") t)
-         "\\>")
-       1 font-lock-keyword-face)
-      ;; Macros similar to let, when, and while
-      (,(rx symbol-start
-            (or "let" "when" "while") "-"
-            (1+ (or (syntax word) (syntax symbol)))
-            symbol-end)
-       0 font-lock-keyword-face)
-       ;; Global constants - nil, true, false
-      (,(concat
-         "\\<"
-         (regexp-opt
-          '("true" "false") t)
-         "\\>")
-       0 font-lock-constant-face)
-      ;; Number literals
-      (,"\\b\\([[:digit:][[:digit:].]*\\)\\b" 0 'font-lock-constant-face)
-      ;; Highlight `code` marks, just like `elisp'.
-      (,(rx "`" (group-n 1 (optional "#'")
-                         (+ (or (syntax symbol) (syntax word)))) "`")
-       (1 'font-lock-constant-face prepend))
-      ))
+  `( ;; Function definition (anything that starts with def and is not
+    ;; listed above)
+    (,(concat "\\(def[^ \r\n\t]*\\)"
+              "\\>"
+              "[ \r\n\t]*"
+              "\\(" pact-identifier "\\)?")
+     (1 font-lock-keyword-face)
+     (2 font-lock-function-name-face nil t))
+    ;; Special forms
+    (,(concat
+       "("
+       (regexp-opt
+        '("module" "list" "let" "let*"
+          "step" "use" "step-with-rollback") t)
+       "\\>")
+     1 font-lock-keyword-face)
+    ;; Macros similar to let, when, and while
+    (,(rx symbol-start
+          (or "let" "when" "while") "-"
+          (1+ (or (syntax word) (syntax symbol)))
+          symbol-end)
+     0 font-lock-keyword-face)
+    ;; Global constants - nil, true, false
+    (,(concat
+       "\\<"
+       (regexp-opt
+        '("true" "false") t)
+       "\\>")
+     0 font-lock-constant-face)
+    ;; Number literals
+    (,"\\b\\([[:digit:][[:digit:].]*\\)\\b" 0 'font-lock-constant-face)
+    ;; Highlight `code` marks, just like `elisp'.
+    (,(rx "`" (group-n 1 (optional "#'")
+                       (+ (or (syntax symbol) (syntax word)))) "`")
+     (1 'font-lock-constant-face prepend))
+    )
   "Default expressions to highlight in Pact mode.")
 
 (define-derived-mode pact-mode lisp-mode "Pact"
