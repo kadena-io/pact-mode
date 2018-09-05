@@ -98,7 +98,6 @@
   (setq-local inferior-lisp-load-command "(load \"%s\" true)\n")
   (semantic-mode)
   (substitute-key-definition 'lisp-load-file 'pact-load-file lisp-mode-map)
-
   )
 
 (defun pact-load-file (prompt)
@@ -107,7 +106,6 @@ With prefix PROMPT, prompt for file to load."
   (interactive "P")
   (if prompt (call-interactively 'lisp-load-file)
     (lisp-load-file (buffer-name))))
-
 
 (put 'module 'lisp-indent-function 'defun)
 (put 'with-read 'lisp-indent-function 2)
@@ -129,7 +127,7 @@ With prefix PROMPT, prompt for file to load."
   )
 
 (semantic-elisp-setup-form-parser
-    (lambda (form start end)
+    (lambda (form _start _end)
       (semantic-tag-new-function
        (symbol-name (nth 1 form))
        "pact"
@@ -139,7 +137,7 @@ With prefix PROMPT, prompt for file to load."
   defpact)
 
 (semantic-elisp-setup-form-parser
-    (lambda (form start end)
+    (lambda (form _start _end)
       (let ((name (nth 1 form)))
         (semantic-tag-new-include
          (symbol-name (if (eq (car-safe name) 'quote)
@@ -151,7 +149,7 @@ With prefix PROMPT, prompt for file to load."
   )
 
 (semantic-elisp-setup-form-parser
-    (lambda (form start end)
+    (lambda (form _start _end)
       (semantic-tag-new-variable
        (symbol-name (cadr (nth 1 form)))
        "table"
@@ -162,9 +160,8 @@ With prefix PROMPT, prompt for file to load."
   create-table
   )
 
-
 (semantic-elisp-setup-form-parser
-    (lambda (form start end)
+    (lambda (form _start _end)
       (semantic-tag-new-variable
        (symbol-name (cadr (nth 1 form)))
        "keyset"
