@@ -11,12 +11,19 @@ Install `pact-mode` from [MELPA](https://melpa.org) or clone this repo and add i
 ```lisp
 (add-to-list 'load-path "~/[where you cloned it]/pact-mode/")
 (require 'pact-mode)
-(require 'flycheck-pact) ;;; assuming you want to use flycheck
 ```
 
 You'll need a working Pact installation to use the inferior shell.
 [Prebuilt binaries are here](http://kadena.io/pact/downloads.html)
 or you can [build from source](https://github.com/kadena-io/pact#building).
+
+To enable [flycheck-pact](https://github.com/kadena-io/flycheck-pact), you should add the following lines to your `init.el` or `.emacs`:
+
+```lisp
+(require 'pact-mode)
+(require 'flycheck-pact)
+(add-hook 'pact-mode-hook 'flycheck-mode)
+```
 
 Features
 ---
