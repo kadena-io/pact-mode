@@ -1,11 +1,13 @@
 ;;; pact-mode.el --- Mode for Pact, a LISPlike smart contract language. -*- lexical-binding: t; -*-
 
-;; Copyright (c) 2016 Stuart Popejoy
+;; Copyright (c) 2016 - 2019 Stuart Popejoy
 
 ;; Author: Stuart Popejoy
 ;; Maintainer: Stuart Popejoy <stuart@kadena.io>
+;; Maintainer: Emily Pillmore <emily@kadena.io>
+;; Maintainer: Colin Woodbury <colin@kadena.io>
 ;; Keywords: pact, lisp, languages, blockchain, smartcontracts, tools, mode
-;; Version: 0.0.4-git
+;; Version: 0.0.5-git
 ;; URL: https://github.com/kadena-io/pact-mode
 ;; Package-Requires: ((emacs "24.3"))
 
@@ -29,12 +31,14 @@
 
 ;;; Change Log:
 
+;; Version 0.0.5
+;;   Enable syntax highlighting for new keywords.
+
 ;;; Code:
 
 (require 'semantic)
 (require 'semantic/bovine/el)
 (require 'inf-lisp)
-
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")
@@ -56,8 +60,9 @@
     (,(concat
        "("
        (regexp-opt
-        '("module" "list" "let" "let*"
-          "step" "use" "step-with-rollback") t)
+        '("module" "list" "let*" "let"
+          "step" "use" "step-with-rollback"
+          "interface" "implements" "if" "bless") t)
        "\\>")
      1 font-lock-keyword-face)
     ;; Macros similar to let, when, and while
