@@ -188,6 +188,11 @@ With prefix PROMPT, prompt for file to load."
 (add-to-list 'auto-mode-alist
              '("\\.\\(pact\\|repl\\)\\'" . pact-mode))
 
+(modify-syntax-entry ?\[ "(]" pact-mode-syntax-table)
+(modify-syntax-entry ?\] ")\[" pact-mode-syntax-table)
+(modify-syntax-entry ?\{ "(}" pact-mode-syntax-table)
+(modify-syntax-entry ?\} ")\{" pact-mode-syntax-table)
+
 (provide 'pact-mode)
 
 ;;; pact-mode.el ends here
