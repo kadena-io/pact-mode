@@ -99,18 +99,101 @@
   (setq-local semantic-function-argument-separation-character " ")
   (setq-local semantic-function-argument-separator " ")
   (setq-local semantic--parse-table semantic--elisp-parse-table)
-  (setq-local inferior-lisp-program "pact") ;; TODO prompt stuff isn't working
+  (setq-local inferior-lisp-program "pact")
   (setq-local inferior-lisp-load-command "(load \"%s\" true)\n")
   (semantic-mode)
   (substitute-key-definition 'lisp-load-file 'pact-load-file lisp-mode-map)
+  (substitute-key-definition 'lisp-compile-defun 'pact-compile lisp-mode-map)
   )
+
+;;;###autoload
+(defface pact-error-face
+  '((((supports :underline (:style wave)))
+     :underline (:style wave :color "#dc322f"))
+    (t
+     :inherit error))
+  "Face used for marking error lines."
+  :group 'pact-mode)
+
+;;;###autoload
+(defface pact-warning-face
+  '((((supports :underline (:style wave)))
+     :underline (:style wave :color "#b58900"))
+    (t
+     :inherit warning))
+  "Face used for marking warning lines."
+  :group 'pact-mode)
 
 (defun pact-load-file (prompt)
   "Load current buffer into pact inferior process.
-With prefix PROMPT, prompt for file to load."
+With prefix, prompt for file to load."
   (interactive "P")
-  (if prompt (call-interactively 'lisp-load-file)
-    (lisp-load-file (buffer-name))))
+  (let ((fname
+         (if prompt
+             (expand-file-name (read-file-name "Load pact file: " nil nil t))
+           (buffer-name))))
+    (inferior-lisp inferior-lisp-program)
+    (lisp-load-file fname)))
+
+(defvar pact-compile-cmd "pact %s"
+  "Command template for `pact-compile'")
+
+(defvar pact-compile-history nil
+  "Compile command history for `pact-compile'")
+
+(defun pact-compile (prompt)
+  "Compile current buffer. With prefix, prompt for compilation command."
+  (interactive "P")
+  (remove-overlays)
+  (add-hook 'compilation-finish-functions 'pact-get-compile-errors)
+  (let*
+      ((defcmd (format pact-compile-cmd (buffer-name)))
+       (cmd (if prompt
+                (read-string "Compile pact with: " nil 'pact-compile-history defcmd)
+              defcmd)))
+    (compile cmd t)))
+
+
+(defun pact-get-compile-errors (cmpbuf statusdesc)
+  (when cmpbuf (set-buffer cmpbuf))
+  (goto-char (point-min))
+  (remove-hook 'compilation-finish-functions 'pact-get-compile-errors)
+  (let ((first-err nil))
+    (while
+        (when-let
+            ((proppos (next-single-property-change (point) 'compilation-message))
+             (prop (get-text-property proppos 'compilation-message))
+             (endpos (next-single-property-change proppos 'compilation-message))
+             (loc (compilation--message->loc prop))
+             (fs (compilation--loc->file-struct loc))
+             (file (caar fs))
+             (line (cadr loc))
+             (col (car loc)))
+          (goto-char endpos)
+          ;;(message "%s %s %s" file line col)
+          (when-let
+              ((fbuf (get-buffer file))
+               (msg (buffer-substring endpos (line-end-position))))
+            (save-excursion
+              (set-buffer fbuf)
+              (goto-line line)
+              (forward-char col)
+              (let*
+                  ((o (point))
+                   (ovl (make-overlay o (+ 4 o))))
+                (overlay-put ovl 'face 'pact-error-face)
+                (overlay-put ovl 'help-echo msg)
+                (unless first-err (setq first-err ovl)))))
+          endpos))
+    (if first-err
+        (progn
+          (set-buffer (overlay-buffer first-err))
+          (goto-char (overlay-start first-err))
+          (message (overlay-get first-err 'help-echo)))
+      (message "No errors found"))))
+
+
+
 
 (put 'module 'lisp-indent-function 'defun)
 (put 'with-read 'lisp-indent-function 2)
