@@ -101,6 +101,7 @@
   (setq-local semantic--parse-table semantic--elisp-parse-table)
   (setq-local inferior-lisp-program "pact")
   (setq-local inferior-lisp-load-command "(load \"%s\" true)\n")
+  (setq-local electric-indent-inhibit t)
   (semantic-mode)
   (substitute-key-definition 'lisp-load-file 'pact-load-file lisp-mode-map)
   (substitute-key-definition 'lisp-compile-defun 'pact-compile lisp-mode-map)
