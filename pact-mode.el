@@ -39,6 +39,8 @@
 (require 'semantic)
 (require 'semantic/bovine/el)
 (require 'inf-lisp)
+(require 'comint)
+
 
 (defconst pact-symbols "%#+_&$@<>=^?*!|/-"
   "Regexp match for non-alphanumerics in pact symbols.")
@@ -124,6 +126,14 @@
      :inherit warning))
   "Face used for marking warning lines."
   :group 'pact-mode)
+
+(defun pact/open-repl ()
+ "Open the Pact REPL"
+(interactive)
+(pop-to-buffer (get-buffer-create "*Pact*"))
+(make-comint-in-buffer "pact" "*Pact*" "pact"))
+
+
 
 (defun pact-load-file (prompt)
   "Load current buffer into pact inferior process.
