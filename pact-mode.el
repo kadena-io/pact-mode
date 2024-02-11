@@ -89,6 +89,18 @@
     )
   "Default expressions to highlight in Pact mode.")
 
+(defun pact-send-buffer-content ()
+  "Send the current buffer content to the Pact inferior Lisp process."
+  (interactive)
+  ;; Ensure the inferior Lisp process is running
+  (unless (get-buffer-process inferior-lisp-buffer)
+    (inferior-lisp inferior-lisp-program))
+  ;; Send the current buffer content as a string to the inferior Lisp process
+  (let ((content (buffer-string)))  ; Capture the entire buffer content as a string
+    (comint-send-string (get-buffer-process inferior-lisp-buffer) content)
+    (comint-send-string (get-buffer-process inferior-lisp-buffer) "\n")))
+
+
 ;;;###autoload
 (define-derived-mode pact-mode lisp-mode "Pact"
   "Major more for editing Pact smart contracts and test scripts."
@@ -128,10 +140,10 @@
   :group 'pact-mode)
 
 (defun pact/open-repl ()
- "Open the Pact REPL"
-(interactive)
-(pop-to-buffer (get-buffer-create "*Pact*"))
-(make-comint-in-buffer "pact" "*Pact*" "pact"))
+  "Open the Pact REPL"
+  (interactive)
+  (pop-to-buffer (get-buffer-create "*Pact*"))
+  (make-comint-in-buffer "pact" "*Pact*" "pact"))
 
 
 
